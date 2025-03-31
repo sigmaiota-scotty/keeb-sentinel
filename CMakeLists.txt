@@ -10,6 +10,8 @@ endif()
 
 find_package(Threads REQUIRED)
 
+include_directories(${CMAKE_SOURCE_DIR}/external)
+
 add_executable(keystroke_defense_client WIN32
     main.cpp
 )
