@@ -21,7 +21,7 @@ jobs:
           cmake --build . --config Release
 
       - name: Upload binary
-        uses: actions/upload-artifact@cded7e8f7a2cf9e638d81c3dc19923a43047de1c
+        uses: actions/upload-artifact@v3.1.3
         with:
           name: keystroke_defense_client
           path: build/Release/keystroke_defense_client.exe
