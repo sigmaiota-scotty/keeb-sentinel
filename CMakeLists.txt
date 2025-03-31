@@ -1,27 +1,26 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.15)
 project(keystroke_defense_client)
 
-set(CMAKE_SYSTEM_NAME Windows)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS OFF)
 
-# Output directory
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+if(MSVC)
+    set(THREADS_PREFER_PTHREAD_FLAG OFF)
+endif()
 
-# Include JSON header
-include_directories(${CMAKE_SOURCE_DIR}/external)
+find_package(Threads REQUIRED)
 
-# Executable
-add_executable(keystroke_defense_client main.cpp)
+add_executable(keystroke_defense_client WIN32
+    main.cpp
+)
 
-# Link Windows + pthread libraries
-target_link_libraries(keystroke_defense_client
+target_link_libraries(keystroke_defense_client PRIVATE
     setupapi
     hid
     crypt32
-    user32
-    gdi32
-    advapi32
-    pthread
+    Threads::Threads
+)
+
+set_target_properties(keystroke_defense_client PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin
 )
