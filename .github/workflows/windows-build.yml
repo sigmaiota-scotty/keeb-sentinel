@@ -24,4 +24,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: keystroke_defense_client
-          path: build/Release/keystroke_defense_client.exe
+          path: build/bin/Release/keystroke_defense_client.exe
